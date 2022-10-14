@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 //first define env variables then call app
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
-process.on('uncaughtException', (err) => {
+process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
-  console.log('uncaught Exception, shutting down');
+  console.log("uncaught Exception, shutting down");
   process.exit(1);
 });
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: "./config.env" });
 
 const DB = process.env.DATABASE.replace(
-  'PASSWORD',
+  "PASSWORD",
   process.env.DATABASE_PASSWORD
 );
 
@@ -23,10 +23,10 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => {
-    console.log('DB connected sucessfully!');
+    console.log("DB connected sucessfully!");
   });
 
-const app = require('./app');
+const app = require("./app");
 
 // Start Server
 const port = process.env.PORT || 8000;
@@ -35,9 +35,9 @@ const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
 
-process.on('unhandledRejection', (err) => {
+process.on("unhandledRejection", (err) => {
   console.log(err.name, err.message);
-  console.log('Unhandle Rejection, shutting down');
+  console.log("Unhandle Rejection, shutting down");
   server.close(() => {
     process.exit(1);
   });
