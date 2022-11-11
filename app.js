@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const AppError = require("./utils/appError");
 const tourRouter = require("./routes/tourRoutes.js");
 const userRouter = require("./routes/userRoutes.js");
+const reviewRouter = require("./routes/reviewRoutes");
 const errorHandler = require("./controllers/errorController");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
@@ -73,6 +74,7 @@ app.delete('/api/v1/tours/:id', deleteTour);
 
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 app.all("*", (req, res, next) => {
   //const err = `can't find ${req.originalUrl} on the server!`;
